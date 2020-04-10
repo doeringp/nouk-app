@@ -1,8 +1,13 @@
 <div class="ui fixed inverted menu">
   <div class="ui container">
-    <a href="#" class="header item">
+    <a [routerLink]="['/']" class="header item">
       <img class="logo" src="https://semantic-ui.com/examples/assets/images/logo.png">
       Nouk - der Namensfinder
     </a>
+    <div class="right menu">
+      <a [routerLink]="['/search']" class="item">
+        <i class="search icon"></i>
+      </a>
+    </div>
   </div>
 </div>

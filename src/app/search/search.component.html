@@ -1,0 +1,18 @@
+<div class="ui container">
+  <div class="ui fluid massive icon input">
+    <i class="search icon"></i>
+    <input #searchBox id="search-box" (input)="search(searchBox.value)"
+           type="text" placeholder="Name suchen...">
+  </div>
+
+  <br><br>
+  <app-name-list [names]="names$ | async"></app-name-list>
+
+  <div *ngIf="names$ | async" class="ui placeholder segment">
+    <div class="ui icon header">
+      <i class="search icon"></i>
+      Name nicht gefunden?
+    </div>
+    <div class="ui button">Hinzufügen</div>
+  </div>
+</div>

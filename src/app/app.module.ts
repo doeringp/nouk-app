@@ -6,19 +6,24 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BoardComponent } from './board/board.component';
 import { NameListComponent } from './name-list/name-list.component';
+import { SearchComponent } from './search/search.component';
+import { FirstNameService } from './firstname.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BoardComponent,
-    NameListComponent
+    NameListComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    FirstNameService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
