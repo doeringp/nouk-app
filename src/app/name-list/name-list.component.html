@@ -1,0 +1,23 @@
+<div class="ui centered cards">
+  <div *ngFor="let name of names" class="card">
+    <div class="content">
+      <div class="header">
+        <i [ngClass]="getGenderIconCssClass(name)"></i>
+        {{ name.name }}
+      </div>
+      <div class="description">
+        {{ name.meaning }}
+      </div>
+    </div>
+    <div class="extra content">
+      <span class="left floated star icon">
+        <i class="thumbs up icon"></i>
+        {{ name.likes }} Likes
+      </span>
+      <span class="right floated like icon">
+        <i class="thumbs down icon"></i>
+        {{ name.dislikes }} Dislikes
+      </span>
+    </div>
+  </div>
+</div>
