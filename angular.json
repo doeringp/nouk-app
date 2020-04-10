@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/fomantic-ui-css/semantic.css",
               "src/styles.scss"
             ],
             "scripts": []

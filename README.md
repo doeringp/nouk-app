@@ -1,4 +1,6 @@
-# NoukApp
+# Nouk App
+
+An app that can help you to find a name for your baby.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 
