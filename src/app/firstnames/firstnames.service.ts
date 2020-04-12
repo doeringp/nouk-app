@@ -4,7 +4,7 @@ import { firstNames } from './firstnames';
 import { FirstName } from './models';
 
 @Injectable({ providedIn: 'root' })
-export class FirstNameService {
+export class FirstNamesService {
 
   searchNames(term: string): Observable<FirstName[]> {
     if (!term) {

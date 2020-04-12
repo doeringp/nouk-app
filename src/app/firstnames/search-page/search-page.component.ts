@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { FirstName } from '../models';
-import { firstNames } from '../firstnames';
-import { FirstNameService } from '../firstnames.service';
+import { FirstNamesService } from '../firstnames.service';
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent implements OnInit, AfterContentInit  {
+  term: string;
   names$: Observable<FirstName[]>;
+  @ViewChild("searchBox") searchBox: ElementRef;
   private searchTerms = new Subject<string>();
 
-  constructor(private firstNameService: FirstNameService) { }
+  constructor(private firstNamesService: FirstNamesService) { }
 
   ngOnInit(): void {
     this.names$ = this.searchTerms.pipe(
@@ -25,12 +26,17 @@ export class SearchPageComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.firstNameService.searchNames(term)),
+      switchMap((term: string) => this.firstNamesService.searchNames(term)),
     );
+  }
+
+  ngAfterContentInit(): void {
+    setTimeout(() => {
+      this.searchBox.nativeElement.focus();
+    }, 100);
   }
 
   search(term: string): void {
     this.searchTerms.next(term);
   }
-
 }

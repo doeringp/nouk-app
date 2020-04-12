@@ -1,0 +1,31 @@
+<div class="ui container">
+  <form class="ui form" (ngSubmit)="onSubmit()" #form="ngForm">
+    <div class="field">
+      <label>Name</label>
+      <input [(ngModel)]="model.name" type="text" name="name" placeholder="Vorname" required>
+    </div>
+
+    <div class="inline fields">
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input [value]="Gender.Female" [(ngModel)]="model.gender" type="radio" name="gender" required>
+          <label (click)="model.gender = Gender.Female" style="cursor: pointer">Mädchen</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input [value]="Gender.Male" [(ngModel)]="model.gender" type="radio" name="gender" required>
+          <label (click)="model.gender = Gender.Male" style="cursor: pointer">Junge</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Bedeutung</label>
+      <textarea [(ngModel)]="model.meaning" name="meaning" rows="2" placeholder="Bedeutung des Namens"></textarea>
+    </div>
+    <button class="ui button" type="submit" [disabled]="!form.form.valid">
+      Speichern
+    </button>
+  </form>
+</div>

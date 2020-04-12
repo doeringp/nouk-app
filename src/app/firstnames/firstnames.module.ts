@@ -1,22 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FirstNameService as FirstNamesService } from './firstnames.service';
+import { FormsModule }   from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+import { FirstNamesService } from './firstnames.service';
 import { NamesPageComponent } from './names-page/names-page.component';
 import { NamesListComponent } from './names-list/names-list.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { NameEditPageComponent } from './name-edit-page/name-edit-page.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     NamesPageComponent,
-    SearchPageComponent,
-    NamesListComponent
+    NamesListComponent,
+    NameEditPageComponent,
+    SearchPageComponent
   ],
   exports: [
     NamesPageComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    NameEditPageComponent
   ],
   providers: [
     FirstNamesService

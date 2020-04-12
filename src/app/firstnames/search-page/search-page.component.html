@@ -1,7 +1,9 @@
 <div class="ui container">
   <div class="ui fluid massive icon input">
     <i class="search icon"></i>
-    <input #searchBox id="search-box" (input)="search(searchBox.value)"
+    <input #searchBox id="search-box"
+          (input)="search(searchBox.value)"
+          (change)="term = searchBox.value"
            type="text" placeholder="Name suchen...">
   </div>
 
@@ -13,6 +15,6 @@
       <i class="search icon"></i>
       Name nicht gefunden?
     </div>
-    <div class="ui button">Hinzufügen</div>
+    <a class="ui button" [routerLink]="['/name/new', term]">Hinzufügen</a>
   </div>
 </div>

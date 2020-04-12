@@ -1,4 +1,4 @@
-export interface FirstName {
+export class FirstName {
   gender: Gender;
   name: string;
   meaning: string;
