@@ -6,7 +6,7 @@
   </div>
 
   <br><br>
-  <app-name-list [names]="names$ | async"></app-name-list>
+  <app-names-list [names]="names$ | async"></app-names-list>
 
   <div *ngIf="names$ | async" class="ui placeholder segment">
     <div class="ui icon header">

@@ -1,28 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FirstNamesModule } from './firstnames/firstnames.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { BoardComponent } from './board/board.component';
-import { NameListComponent } from './name-list/name-list.component';
-import { SearchComponent } from './search/search.component';
-import { FirstNameService } from './firstname.service';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    BoardComponent,
-    NameListComponent,
-    SearchComponent
+    NavComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [
-    FirstNameService
+    AppRoutingModule,
+    FirstNamesModule
   ],
   bootstrap: [AppComponent]
 })

@@ -3,14 +3,14 @@ import { Subject, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { FirstName } from '../models';
 import { firstNames } from '../firstnames';
-import { FirstNameService } from '../firstname.service';
+import { FirstNameService } from '../firstnames.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  selector: 'app-search-page',
+  templateUrl: './search-page.component.html',
+  styleUrls: ['./search-page.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchPageComponent implements OnInit {
   names$: Observable<FirstName[]>;
   private searchTerms = new Subject<string>();
 

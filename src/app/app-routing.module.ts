@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BoardComponent } from './board/board.component';
-import { SearchComponent } from './search/search.component';
+import { NamesPageComponent } from './firstnames/names-page/names-page.component';
+import { SearchPageComponent } from './firstnames/search-page/search-page.component';
 
 
 const routes: Routes = [
-  { path: '', component: BoardComponent, pathMatch: 'full'},
-  { path: 'search', component: SearchComponent },
+  { path: '', component: NamesPageComponent, pathMatch: 'full'},
+  { path: 'search', component: SearchPageComponent },
 ];
 
 @NgModule({

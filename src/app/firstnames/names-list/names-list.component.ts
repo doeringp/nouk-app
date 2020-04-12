@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FirstName, Gender } from '../models';
 
 @Component({
-  selector: 'app-name-list',
-  templateUrl: './name-list.component.html',
-  styleUrls: ['./name-list.component.scss']
+  selector: 'app-names-list',
+  templateUrl: './names-list.component.html',
+  styleUrls: ['./names-list.component.scss']
 })
-export class NameListComponent implements OnInit {
+export class NamesListComponent implements OnInit {
 
   @Input() names: FirstName[] = [];
   @Input() showIcon: boolean = true;
