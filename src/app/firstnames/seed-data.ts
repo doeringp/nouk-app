@@ -1,6 +1,6 @@
 import { FirstName, Gender } from './models'
 
-export const firstNames : FirstName[] = [
+export const sampleFirstNames : FirstName[] = [
   {
     gender: Gender.Female,
     name: "Rebekka",

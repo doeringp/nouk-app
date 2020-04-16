@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirstName, Gender } from '../models';
+import { FirstNamesService } from '../firstnames.service';
 
 @Component({
   selector: 'app-name-edit-page',
@@ -13,13 +14,15 @@ export class NameEditPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private firstNameService: FirstNamesService) { }
 
   ngOnInit(): void {
     this.model.name = this.route.snapshot.paramMap.get("value");
   }
 
   onSubmit(): void {
+    this.firstNameService.create(this.model);
     this.router.navigateByUrl('');
   }
 }

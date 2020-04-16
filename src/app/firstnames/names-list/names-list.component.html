@@ -5,6 +5,11 @@
         <div class="header">
           <i [ngClass]="getGenderIconCssClass(name)"></i>
           {{ name.name }}
+          <div class="right floated">
+            <button class="ui mini icon basic button">
+              <i class="pencil icon"></i>
+            </button>
+          </div>
         </div>
         <div class="description">
           {{ name.meaning }}

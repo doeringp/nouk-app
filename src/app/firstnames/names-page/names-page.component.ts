@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { firstNames } from '../firstnames';
 import { FirstName, Gender } from '../models';
+import { FirstNamesService } from '../firstnames.service';
 
 @Component({
   selector: 'app-names-page',
@@ -8,12 +8,14 @@ import { FirstName, Gender } from '../models';
   styleUrls: ['./names-page.component.scss']
 })
 export class NamesPageComponent implements OnInit {
-  girls: FirstName[] = firstNames.filter(x => x.gender == Gender.Female);
-  boys: FirstName[] = firstNames.filter(x => x.gender == Gender.Male);
+  girls: FirstName[] = [];
+  boys: FirstName[] = [];
 
-  constructor() { }
+  constructor(
+    private firstNameService: FirstNamesService) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.girls = await this.firstNameService.list(Gender.Female);
+    this.boys = await this.firstNameService.list(Gender.Male);
   }
-
 }
