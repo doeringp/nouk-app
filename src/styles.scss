@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+body, html {
+  scroll-behavior: smooth;
+}
+
+@-webkit-keyframes fadein {
+  from {
+      opacity: 0
+  }
+
+  to {
+      opacity: 1
+  }
+}
+
+@keyframes fadein {
+  from {
+      opacity: 0
+  }
+
+  to {
+      opacity: 1
+  }
+}
