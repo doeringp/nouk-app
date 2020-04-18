@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
+import PouchDBFind from 'pouchdb-find';
 import { sampleFirstNames } from './seed-data';
 import { FirstName, Gender } from './models';
 
@@ -8,6 +9,7 @@ export class FirstNamesService {
   db: PouchDB.Database;
 
   constructor() {
+    PouchDB.plugin(PouchDBFind);
     this.db = new PouchDB('firstnames');
 
     // seed initial firstnames.
@@ -15,6 +17,13 @@ export class FirstNamesService {
       if (info.doc_count === 0) {
         this.db.bulkDocs(sampleFirstNames);
       }
+    });
+
+    this.db.createIndex({
+      index: { fields: ['name']}
+    });
+    this.db.createIndex({
+      index: { fields: ['gender', 'rating'] },
     });
   }
 
@@ -33,6 +42,7 @@ export class FirstNamesService {
     const res = await this.db.put(item);
     if (!res.ok)
       throw "saving the firstname failed.";
+    item._rev = res.rev;
   }
 
   public async remove(item: FirstName): Promise<void> {
@@ -42,27 +52,38 @@ export class FirstNamesService {
   }
 
   public async list(gender?: Gender): Promise<FirstName[]> {
-     const res = await this.db.allDocs<FirstName>({include_docs: true, descending: true});
-     const list = [];
-     for(let i = 0; i < res.rows.length; i++) {
-      let name: FirstName = res.rows[i].doc;
-      if (gender == null) {
-        list.push(name);
-        continue;
-      }
-      if (name.gender === gender) {
-        list.push(name);
-      }
-    }
-    return list;
+    const res = await this.db.find({
+      selector: {
+        'gender': gender,
+        'rating': { '$gt': -1 },
+      },
+      sort: [{'rating': 'desc'}],
+      limit: 5
+     });
+     return this.toList(res.docs);
   }
 
   public async searchNames(term: string): Promise<FirstName[]> {
     if (!term) {
       return [];
     }
-    const result = await this.list();
-    return result.filter(
-      n => n.name.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) > -1);
+    const res = await this.db.find({
+      selector: {
+        name: { '$regex': new RegExp('.*' + this.escapeRegExp(term) + '.*', 'i') }
+      }
+    });
+    return this.toList(res.docs);
+  }
+
+  private toList(docs: any): FirstName[] {
+    const list: FirstName[] = [];
+    for(let doc of docs) {
+     list.push(doc);
+    }
+    return list;
+  }
+
+  private escapeRegExp(value: string): string {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
   }
 }

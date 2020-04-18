@@ -6,7 +6,6 @@ export class FirstName {
       this.name = values.name;
       this.meaning = values.meaning;
     }
-    this.createdAt = new Date();
   }
 
   _id: string;
@@ -14,9 +13,11 @@ export class FirstName {
   gender: Gender;
   name: string;
   meaning: string;
-  likes: number;
-  dislikes: number;
-  createdAt: Date;
+  likes: number = 0;
+  dislikes: number = 0;
+  rating: number = 0;
+  lastRatedAt?: Date;
+  createdAt: Date = new Date();
 }
 
 export enum Gender {

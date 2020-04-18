@@ -16,11 +16,11 @@
         </div>
       </div>
       <div class="extra content">
-        <span class="left floated star icon">
+        <span (click)="like(name, true)" class="left floated star icon">
           <i class="thumbs up icon"></i>
           {{ name.likes }} Likes
         </span>
-        <span class="right floated like icon">
+        <span (click)="like(name, false)" class="right floated like icon">
           <i class="thumbs down icon"></i>
           {{ name.dislikes }} Dislikes
         </span>
