@@ -10,14 +10,15 @@ export class FirstNamesService {
   constructor() {
     this.db = new PouchDB('firstnames');
 
+    // seed initial firstnames.
     this.db.info().then(info => {
       if (info.doc_count === 0) {
-        this.seedSampleData();
+        this.db.bulkDocs(sampleFirstNames);
       }
     });
   }
 
-  public async create(item: FirstName): Promise<string> {
+  public async add(item: FirstName): Promise<string> {
     const res = await this.db.post(item);
     if (!res.ok)
       throw "saving the object failed.";
@@ -47,11 +48,5 @@ export class FirstNamesService {
     const result = await this.list();
     return result.filter(
       n => n.name.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) > -1);
-  }
-
-  private seedSampleData() {
-    for(let name of sampleFirstNames) {
-      this.create(name);
-    }
   }
 }

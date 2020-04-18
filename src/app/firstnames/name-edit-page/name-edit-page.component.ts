@@ -22,7 +22,7 @@ export class NameEditPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.firstNameService.create(this.model);
+    this.firstNameService.add(this.model);
     this.router.navigateByUrl('');
   }
 }
