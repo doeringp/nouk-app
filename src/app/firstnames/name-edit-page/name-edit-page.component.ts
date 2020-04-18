@@ -9,6 +9,7 @@ import { FirstNamesService } from '../firstnames.service';
   styleUrls: ['./name-edit-page.component.scss']
 })
 export class NameEditPageComponent implements OnInit {
+  isNew: Boolean = true;
   model: FirstName = new FirstName();
   Gender = Gender;
 
@@ -17,12 +18,38 @@ export class NameEditPageComponent implements OnInit {
     private router: Router,
     private firstNameService: FirstNamesService) { }
 
-  ngOnInit(): void {
-    this.model.name = this.route.snapshot.paramMap.get("value");
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get("id");
+    if (id) {
+      this.isNew = false;
+      this.model = await this.firstNameService.get(id);
+    } else {
+      this.model.name = this.route.snapshot.paramMap.get("value");
+    }
+    if (!this.model) {
+      console.error("No firstname found with id " + id);
+      this.goBack();
+    }
   }
 
-  onSubmit(): void {
-    this.firstNameService.add(this.model);
-    this.router.navigateByUrl('');
+  async onSubmit() {
+    if (this.isNew) {
+      await this.firstNameService.add(this.model);
+    } else {
+      await this.firstNameService.update(this.model);
+    }
+    this.goBack();
+
+  }
+
+  async onDelete() {
+    if (confirm("Bist du sicher?")) {
+      await this.firstNameService.remove(this.model);
+      this.goBack();
+    }
+  }
+
+  goBack() {
+    this.router.navigateByUrl('');;
   }
 }

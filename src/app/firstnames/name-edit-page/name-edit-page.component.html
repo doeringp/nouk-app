@@ -1,5 +1,5 @@
 <div class="ui container">
-  <form class="ui form" (ngSubmit)="onSubmit()" #form="ngForm">
+  <form class="ui huge form" (ngSubmit)="onSubmit()" #form="ngForm">
     <div class="field">
       <label>Name</label>
       <input [(ngModel)]="model.name" type="text" name="name" placeholder="Vorname" required>
@@ -24,8 +24,15 @@
       <label>Bedeutung</label>
       <textarea [(ngModel)]="model.meaning" name="meaning" rows="2" placeholder="Bedeutung des Namens"></textarea>
     </div>
-    <button class="ui button" type="submit" [disabled]="!form.form.valid">
+    <br>
+    <button class="ui fluid primary huge button" type="submit" [disabled]="!form.form.valid">
       Speichern
+    </button>
+    <div *ngIf="!isNew" class="ui horizontal divider">
+      oder
+    </div>
+    <button *ngIf="!isNew" (click)="onDelete()" class="ui fluid basic negative button" type="button">
+      Löschen
     </button>
   </form>
 </div>

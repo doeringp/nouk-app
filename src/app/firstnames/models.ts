@@ -10,6 +10,7 @@ export class FirstName {
   }
 
   _id: string;
+  _rev: string;
   gender: Gender;
   name: string;
   meaning: string;

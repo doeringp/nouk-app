@@ -6,9 +6,9 @@
           <i [ngClass]="getGenderIconCssClass(name)"></i>
           {{ name.name }}
           <div class="right floated">
-            <button class="ui mini icon basic button">
+            <a [routerLink]="['/name', name._id]" routerLinkActive="router-link-active"  class="ui mini icon basic button">
               <i class="pencil icon"></i>
-            </button>
+            </a>
           </div>
         </div>
         <div class="description">

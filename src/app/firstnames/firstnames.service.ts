@@ -18,11 +18,27 @@ export class FirstNamesService {
     });
   }
 
+  public get(id: string) : Promise<FirstName> {
+    return this.db.get(id);
+  }
+
   public async add(item: FirstName): Promise<string> {
     const res = await this.db.post(item);
     if (!res.ok)
-      throw "saving the object failed.";
+      throw "saving the firstname failed.";
     return res.id;
+  }
+
+  public async update(item: FirstName): Promise<void> {
+    const res = await this.db.put(item);
+    if (!res.ok)
+      throw "saving the firstname failed.";
+  }
+
+  public async remove(item: FirstName): Promise<void> {
+    let res = await this.db.remove(item._id, item._rev);
+    if (!res.ok)
+      throw "removing the firstname failed.";
   }
 
   public async list(gender?: Gender): Promise<FirstName[]> {

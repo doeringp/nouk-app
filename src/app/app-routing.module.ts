@@ -8,6 +8,7 @@ import { NameEditPageComponent } from './firstnames/name-edit-page/name-edit-pag
 const routes: Routes = [
   { path: '', component: NamesPageComponent, pathMatch: 'full'},
   { path: 'search', component: SearchPageComponent },
+  { path: 'name/:id', component: NameEditPageComponent },
   { path: 'name/new/:value', component: NameEditPageComponent },
   { path: '**', redirectTo: '' }
 ];
