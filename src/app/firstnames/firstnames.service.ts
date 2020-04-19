@@ -7,8 +7,13 @@ import { FirstName, Gender } from './models';
 @Injectable({ providedIn: 'root' })
 export class FirstNamesService {
   db: PouchDB.Database;
+  dbInitialized: Promise<void>;
 
   constructor() {
+    this.dbInitialized = this.initDb();
+  }
+
+  async initDb(): Promise<void> {
     PouchDB.plugin(PouchDBFind);
     this.db = new PouchDB('firstnames');
 
@@ -19,19 +24,21 @@ export class FirstNamesService {
       }
     });
 
-    this.db.createIndex({
+    await this.db.createIndex({
       index: { fields: ['name']}
     });
-    this.db.createIndex({
+    await this.db.createIndex({
       index: { fields: ['gender', 'rating'] },
     });
   }
 
-  public get(id: string) : Promise<FirstName> {
-    return this.db.get(id);
+  public async get(id: string) : Promise<FirstName> {
+    await this.dbInitialized;
+    return await this.db.get(id);
   }
 
   public async add(item: FirstName): Promise<string> {
+    await this.dbInitialized;
     const res = await this.db.post(item);
     if (!res.ok)
       throw "saving the firstname failed.";
@@ -39,6 +46,7 @@ export class FirstNamesService {
   }
 
   public async update(item: FirstName): Promise<void> {
+    await this.dbInitialized;
     const res = await this.db.put(item);
     if (!res.ok)
       throw "saving the firstname failed.";
@@ -46,18 +54,20 @@ export class FirstNamesService {
   }
 
   public async remove(item: FirstName): Promise<void> {
+    await this.dbInitialized;
     let res = await this.db.remove(item._id, item._rev);
     if (!res.ok)
       throw "removing the firstname failed.";
   }
 
   public async list(gender?: Gender): Promise<FirstName[]> {
+    await this.dbInitialized;
     const res = await this.db.find({
       selector: {
         'gender': gender,
         'rating': { '$gt': -1 },
       },
-      sort: [{'rating': 'desc'}],
+      sort: [{'gender': 'desc'}, {'rating': 'desc'}],
       limit: 5
      });
      return this.toList(res.docs);
@@ -67,6 +77,7 @@ export class FirstNamesService {
     if (!term) {
       return [];
     }
+    await this.dbInitialized;
     const res = await this.db.find({
       selector: {
         name: { '$regex': new RegExp('.*' + this.escapeRegExp(term) + '.*', 'i') }
