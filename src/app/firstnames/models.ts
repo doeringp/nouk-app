@@ -6,6 +6,9 @@ export class FirstName {
       this.name = values.name;
       this.meaning = values.meaning;
     }
+    var d = new Date();
+    d.setDate(d.getDate() - 1);
+    this.lastRatedAt = d;
   }
 
   _id: string;
@@ -13,10 +16,10 @@ export class FirstName {
   gender: Gender;
   name: string;
   meaning: string;
-  likes: number = 1;
+  likes: number = 0;
   dislikes: number = 0;
-  rating: number = 1;
-  lastRatedAt: Date = new Date();
+  rating: number = 0;
+  lastRatedAt: Date;
   createdAt: Date = new Date();
 }
 

@@ -25,6 +25,9 @@ export class NameEditPageComponent implements OnInit {
       this.model = await this.firstNameService.get(id);
     } else {
       this.model.name = this.route.snapshot.paramMap.get("value");
+      this.model.likes = 1;
+      this.model.rating = 1;
+      this.model.lastRatedAt = new Date();
     }
     if (!this.model) {
       console.error("No firstname found with id " + id);
