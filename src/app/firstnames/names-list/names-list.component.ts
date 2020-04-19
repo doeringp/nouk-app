@@ -44,4 +44,20 @@ export class NamesListComponent implements OnInit {
     await this.firstNameService.update(name);
     this.liked.emit(true);
   }
+
+  isRatedToday(name: FirstName): Boolean {
+    if (!name.lastRatedAt) {
+      return false;
+    }
+    // Getting object back from PouchDB.
+    var d = new Date(name.lastRatedAt);
+    return this.isToday(d);
+  }
+
+  private isToday(someDate: Date): Boolean {
+    const today = new Date();
+    return someDate.getDate() == today.getDate() &&
+      someDate.getMonth() == today.getMonth() &&
+      someDate.getFullYear() == today.getFullYear();
+  }
 }

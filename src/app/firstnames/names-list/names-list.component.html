@@ -15,7 +15,7 @@
           {{ name.meaning }}
         </div>
       </div>
-      <div class="extra content">
+      <div *ngIf="!isRatedToday(name)" class="extra content">
         <span (click)="like(name, true)" class="left floated star icon">
           <i class="thumbs up icon"></i>
           {{ name.likes }} Likes
@@ -24,6 +24,23 @@
           <i class="thumbs down icon"></i>
           {{ name.dislikes }} Dislikes
         </span>
+      </div>
+      <div *ngIf="isRatedToday(name)" class="extra content">
+        <span class="left floated">
+          <i class="thumbs up icon"></i>
+          {{ name.likes }} Likes
+        </span>
+        <span class="right floated">
+          <i class="thumbs down icon"></i>
+          {{ name.dislikes }} Dislikes
+        </span>
+      </div>
+      <div *ngIf="isRatedToday(name)" class="extra content">
+        <span>
+          <i class="calendar check outline icon"></i>
+          Heute schon bewertet.
+        </span>
+
       </div>
     </div>
   </div>

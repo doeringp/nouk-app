@@ -13,10 +13,10 @@ export class FirstName {
   gender: Gender;
   name: string;
   meaning: string;
-  likes: number = 0;
+  likes: number = 1;
   dislikes: number = 0;
-  rating: number = 0;
-  lastRatedAt?: Date;
+  rating: number = 1;
+  lastRatedAt: Date = new Date();
   createdAt: Date = new Date();
 }
 
