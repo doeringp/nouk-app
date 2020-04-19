@@ -4,6 +4,11 @@ body, html {
   scroll-behavior: smooth;
 }
 
+.fadein {
+  -webkit-animation: fadein 1s;
+  animation: fadein 1s;
+}
+
 @-webkit-keyframes fadein {
   from {
       opacity: 0
