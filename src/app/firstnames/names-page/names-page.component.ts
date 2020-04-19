@@ -27,4 +27,15 @@ export class NamesPageComponent implements OnInit {
       this.boys = await this.firstNameService.list(Gender.Male);
     }
   }
+
+  async loadMore(gender: Gender) {
+    var list = gender === Gender.Female ? this.girls : this.boys;
+    const names = await this.firstNameService.list(gender, {
+      skip: list.length,
+      limit: 5
+    });
+    for(let name of names) {
+      list.push(name);
+    }
+  }
 }

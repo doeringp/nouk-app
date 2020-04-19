@@ -60,15 +60,17 @@ export class FirstNamesService {
       throw "removing the firstname failed.";
   }
 
-  public async list(gender?: Gender): Promise<FirstName[]> {
+  public async list(gender?: Gender, pagination?: PaginationParameters): Promise<FirstName[]> {
     await this.dbInitialized;
+    const page = pagination || { skip: 0, limit: 5 };
     const res = await this.db.find({
       selector: {
         'gender': gender,
         'rating': { '$gt': -1 },
       },
       sort: [{'gender': 'desc'}, {'rating': 'desc'}],
-      limit: 5
+      skip: page.skip,
+      limit: page.limit
      });
      return this.toList(res.docs);
   }
@@ -81,7 +83,9 @@ export class FirstNamesService {
     const res = await this.db.find({
       selector: {
         name: { '$regex': new RegExp('.*' + this.escapeRegExp(term) + '.*', 'i') }
-      }
+      },
+      sort: ['name'],
+      limit: 10
     });
     return this.toList(res.docs);
   }
@@ -97,4 +101,9 @@ export class FirstNamesService {
   private escapeRegExp(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
   }
+}
+
+export interface PaginationParameters {
+  skip: number;
+  limit: number
 }

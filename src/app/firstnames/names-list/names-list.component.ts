@@ -11,7 +11,8 @@ export class NamesListComponent implements OnInit {
 
   @Input() names: FirstName[] = [];
   @Input() showIcon: boolean = true;
-  @Output() liked: EventEmitter<Boolean> = new EventEmitter();
+  @Output() liked: EventEmitter<void> = new EventEmitter();
+  @Output() wantMoreItems: EventEmitter<void> = new EventEmitter();
 
   constructor(
     private firstNameService: FirstNamesService
@@ -42,7 +43,11 @@ export class NamesListComponent implements OnInit {
     }
     name.lastRatedAt = new Date();
     await this.firstNameService.update(name);
-    this.liked.emit(true);
+    this.liked.emit();
+  }
+
+  onWantMoreItems() {
+    this.wantMoreItems.emit();
   }
 
   isRatedToday(name: FirstName): Boolean {

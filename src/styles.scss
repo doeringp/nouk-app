@@ -4,6 +4,10 @@ body, html {
   scroll-behavior: smooth;
 }
 
+#page-content {
+  margin-bottom: 1em;
+}
+
 .fadein {
   -webkit-animation: fadein 1s;
   animation: fadein 0.5s;

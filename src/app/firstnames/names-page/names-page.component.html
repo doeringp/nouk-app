@@ -8,7 +8,8 @@
     </div>
   </h2>
   <app-names-list [names]="girls" [showIcon]="false"
-    (liked)="reloadData([Gender.Female])">
+    (liked)="reloadData([Gender.Female])"
+    (wantMoreItems)="loadMore(Gender.Female)">
   </app-names-list>
 
   <h2 class="ui header">
@@ -19,6 +20,7 @@
     </div>
   </h2>
   <app-names-list [names]="boys" [showIcon]="false"
-    (liked)="reloadData([Gender.Male])">
+    (liked)="reloadData([Gender.Male])"
+    (wantMoreItems)="loadMore(Gender.Male)">
   </app-names-list>
 </div>

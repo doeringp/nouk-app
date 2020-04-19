@@ -40,8 +40,10 @@
           <i class="calendar check outline icon"></i>
           Heute schon bewertet.
         </span>
-
       </div>
     </div>
   </div>
+  <br>
+  <button *ngIf="wantMoreItems.observers.length > 0" (click)="onWantMoreItems()"
+    class="fluid ui button">Mehr Namen zeigen</button>
 </div>
